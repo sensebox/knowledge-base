@@ -10,7 +10,17 @@ resources:
   - name: senseBoxMCU Library
     link: https://github.com/sensebox/SenseBoxMCU-Lib
 ---
+
+<div className="alert alert--warning">
+  <h2> Warnung </h2>
+  <div>
+    Die senseBoxIO Library ist nur für die senseBoxMCU und <b>nicht</b> für die
+    senseBoxMCU-S2 verfügbar.
+  </div>
+</div>
+
 # senseBox MCU Library
+
 Die senseBox MCU Library bietet dir Zugriff auf die folgenden Funktionen/Sensoren:
 
 - Temperatur- und Luftfeuchtigkeitsensor [Sensor HDC1080](https://sensebox.kaufen/product/temperatur-luftfeuchte)
@@ -19,36 +29,39 @@ Die senseBox MCU Library bietet dir Zugriff auf die folgenden Funktionen/Sensore
 - Ultraschall Distanzsensor [HC SR04]
 - Feinstaubsensor [SDS011](https://sensebox.kaufen/product/feinstaub-sds011)
 - senseBox GPS [CAM-M8Q](https://sensebox.kaufen/product/gps) --> benötigt [TinyGPSPlus](https://github.com/mikalhart/TinyGPSPlus)
-- Wifi-Verbindung über das WifiBee [WINC1500](https://sensebox.kaufen/product/wifi-bee) 
+- Wifi-Verbindung über das WifiBee [WINC1500](https://sensebox.kaufen/product/wifi-bee)
 - Senden von Daten an die [openSenseMap](https://opensensemap.org)
 
 ## Verwendung
-Die senseBoxMCU Library ist Bestandteil des Board-Support-Packages und wird automatisch installiert. 
+
+Die senseBoxMCU Library ist Bestandteil des Board-Support-Packages und wird automatisch installiert.
 
 Die senseBoxMCU Library lässt sich einzeln über folgenden Befehl einbinden:
 
-```arduino
+```c++
 include <senseBoxMCU.h>
 ```
 
 ## Klassen und Funktionen
-Die Library enthält die folgenden Klassen und Funktionen. Erstelle eine neue Instanz einer Klasse, um auf ihre Funktionen zugreifen zu können, z.B. bietet dir die Klasse 
 
-```Arduino
+Die Library enthält die folgenden Klassen und Funktionen. Erstelle eine neue Instanz einer Klasse, um auf ihre Funktionen zugreifen zu können, z.B. bietet dir die Klasse
+
+```c++
 #include "senseBoxMCU.h"
 
 HDC1080 hdc;
 ```
- 
+
 Zugriff auf die folgenden Funktionen:
 
-```Arduino
+```c++
 hdc.getTemperature();
 hdc.getHumidity();
 ```
 
 ### Bee
-```Arduino 
+
+```c++
 public:
 	Bee();
 		uint8_t connectToWifi(char* ssid, char* password);
@@ -56,10 +69,11 @@ public:
 		char* getSsid();
 		char* getPassword();
 		char* getIpAddress();
-```		
+```
 
 ### OpenSenseMap
-```Arduino 
+
+```c++
 Classname: OpenSenseMap
 
 functions public:
@@ -70,7 +84,8 @@ functions public:
 ```
 
 ### SDS011
-```Arduino 
+
+```c++
 Classname: SDS011
 
 functions public:
@@ -80,17 +95,19 @@ functions public:
 ```
 
 ### HDC1080
-```Arduino 
+
+```c++
 Classname: HDC1080
 
 functions public:
 			uint8_t begin(void);
 			double getTemperature(void);
-			double getHumidity(void); 
+			double getHumidity(void);
 ```
 
 ### VEML6070
-```Arduino 
+
+```c++
 Classname: TSL45315
 
 functions public:
@@ -99,16 +116,18 @@ functions public:
 ```
 
 ### TSL45315
-```Arduino 
+
+```c++
 Classname: TSL45315
 
 functions public:
 			uint8_t begin(void);
-			unsigned long getIlluminance(void); 
+			unsigned long getIlluminance(void);
 ```
 
 ### Ultrasonic
-```Arduino 
+
+```c++
 Classname: Ultrasonic
 
 functions public:
@@ -117,7 +136,8 @@ functions public:
 ```
 
 ### BMP280
-```Arduino 
+
+```c++
 Classname: BMP280
 
 functions public:
@@ -128,7 +148,8 @@ functions public:
 ```
 
 ### GPS
-```Arduino 
+
+```c++
 Classname: GPS
 
 functions public:
@@ -144,18 +165,18 @@ functions public:
 
 ### Mic
 
-```Arduino
+```c++
 
 Classname: Microphone
 
-functions public: 
+functions public:
 		Microphone (int pin);
 		float getValue();
 ```
 
 ### BMX
 
-```Arduino
+```c++
 
 Classname BMX055
 
@@ -170,18 +191,17 @@ functions	public:
 
 ### Button
 
-```Arduino
+```c++
 
 Classname Button
 
-functions public: 
+functions public:
 		Button(int pin);
 		void begin();
 		bool getSwitch();
 		bool isPressed();
 		bool wasPressed();
 ```
-
 
 > - [Shop](https://sensebox.kaufen/product/sensebox-mini)
 > - [senseBoxMCU Library](https://github.com/sensebox/SenseBoxMCU-Lib)

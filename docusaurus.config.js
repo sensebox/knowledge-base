@@ -1,10 +1,10 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-
-const collapse = require('remark-collapse')
+const { themes } = require("prism-react-renderer");
+const lightCodeTheme = themes.github;
+const darkCodeTheme = themes.dracula;
+const collapse = require("remark-collapse");
 
 require("dotenv").config();
 
@@ -30,7 +30,19 @@ const config = {
     defaultLocale: "de",
     locales: ["de", "en"],
   },
-
+  plugins: [
+    async function myPlugin(context, options) {
+      return {
+        name: "docusaurus-tailwindcss",
+        configurePostCss(postcssOptions) {
+          // Appends TailwindCSS and AutoPrefixer.
+          postcssOptions.plugins.push(require("tailwindcss"));
+          postcssOptions.plugins.push(require("autoprefixer"));
+          return postcssOptions;
+        },
+      };
+    },
+  ],
   presets: [
     [
       "classic",
@@ -64,14 +76,20 @@ const config = {
         items: [
           {
             type: "doc",
-            docId: "intro",
+            docId: "arduino/first-steps",
             position: "left",
-            label: "Tutorial",
+            label: "Get started",
           },
-          // {to: '/blog', label: 'Blog', position: 'left'},
           {
-            type: "localeDropdown",
-            position: "right",
+            type: "doc",
+            docId: "tutorials/first-steps",
+            position: "left",
+            label: "Videos",
+          },
+          {
+            href: "https://www.sensebox.de",
+            position: "left",
+            label: "senseBox.de",
           },
           {
             href: "https://github.com/sensebox/knowledge-base",
@@ -80,49 +98,12 @@ const config = {
           },
         ],
       },
-      footer: {
-        style: "dark",
-        links: [
-          {
-            title: "Docs",
-            items: [
-              {
-                label: "Tutorial",
-                to: "/docs/intro",
-              },
-            ],
-          },
-          {
-            title: "Community",
-            items: [
-              {
-                label: "Twitter",
-                href: "https://twitter.com/sensebox_de",
-              },
-            ],
-          },
-          {
-            title: "More",
-            items: [
-              {
-                label: "GitHub",
-                href: "https://github.com/sensebox/knowledge-base",
-              },
-            ],
-          },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
-      },
       algolia: {
         appId: process.env.ALGOLIA_APPID,
         apiKey: process.env.ALGOLIA_APIKEY,
-        indexName: process.env.ALGOLIA_INDEXNAME
+        indexName: process.env.ALGOLIA_INDEXNAME,
       },
-      prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
-        additionalLanguages: ["arduino"],
-      },
+
     }),
 };
 
